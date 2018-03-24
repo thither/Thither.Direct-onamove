@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword ')S_FYdhihhhd98&DHIjshd870hd'
+            storeFile file('C:/Users/alex/AndroidStudioProjects/KeyStore-onamove.jks')
+            storePassword 'NH&*sdt)*SD&gS6dJNF87'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "direct.thither.onamove"
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionName "0.010"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
+        versionNameSuffix '-beta'
+        versionCode 5
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    compile 'com.squareup.picasso:picasso:2.71828'
+
+    compile 'com.android.support:support-v4:27.1.0'
+    compile 'com.android.support:support-v13:27.1.0'
+    compile 'com.android.support:appcompat-v7:27.1.0'
+    compile 'com.android.support:support-compat:27.1.0'
+    compile 'com.android.support:support-annotations:27.1.0'
+    compile 'com.android.support:support-core-utils:27.1.0'
+    compile 'com.android.support:support-core-ui:27.1.0'
+    compile 'com.android.support:support-fragment:27.1.0'
+    compile 'com.android.support:gridlayout-v7:27.1.0'
+    compile 'com.android.support:palette-v7:27.1.0'
+
+    compile 'com.android.support:preference-v7:27.1.0'
+    compile 'com.android.support:preference-v14:27.1.0'
+    compile 'com.android.support:transition:27.1.0'
+
+
+    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta5'
+    compile 'com.android.support:design:27.1.0'
+
+    compile 'com.google.android:annotations:4.1.1.4'
+    compile 'com.android.support:support-v4:27.1.0'
+
+
+}

@@ -1,0 +1,49 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="direct.thither.onamove.MainActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        tools:layout_constraintLeft_creator="1"
+        android:visibility="gone"
+        tools:layout_constraintTop_creator="1" />
+
+    <!--android:animateLayoutChanges="true"-->
+    <ScrollView
+        android:id="@+id/MAINMENU_SCROLLER_ID"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/section_label"
+        android:fillViewport="true">
+        <RelativeLayout
+
+            android:id="@+id/main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintTop_creator="1" >
+        </RelativeLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>
