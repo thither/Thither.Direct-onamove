@@ -3,10 +3,6 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'key0'
-            keyPassword ')S_FYdhihhhd98&DHIjshd870hd'
-            storeFile file('C:/Users/alex/AndroidStudioProjects/KeyStore-onamove.jks')
-            storePassword 'NH&*sdt)*SD&gS6dJNF87'
         }
     }
     compileSdkVersion 27
