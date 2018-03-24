@@ -4,6 +4,6 @@ This android application is an example and a skeleton for developing application
 
 ![alt tag](../master/screen-shots/Screenshot_1521726223.png)
 ![alt tag](../master/screen-shots/Screenshot_1521726209.png)
-![alt tag](../master/screen-shots/Screenshot_1521726173.png)
 ![alt tag](../master/screen-shots/Screenshot_1521725960.png)
+![alt tag](../master/screen-shots/Screenshot_1521726173.png)
 ![alt tag](../master/screen-shots/Screenshot_1521728397.png)
