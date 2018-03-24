@@ -12,7 +12,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.support.design.widget.TabLayout;
@@ -27,12 +26,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
-import android.text.format.DateUtils;
-
-import java.util.Currency;
-import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        mGlobals.set_param("isoLoc", tm.getNetworkCountryIso());
+        if(tm!=null)mGlobals.set_param("isoLoc", tm.getNetworkCountryIso());
 
         locationReceiver.onReceive(this, getIntent());
         networkStateReceiver.onReceive(this, getIntent());
@@ -141,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         private SectionsPagerAdapter(FragmentManager fm) { super(fm); }
         private int last_page;
-        public int num_pages=2;
+        private int num_pages=2;
 
         @Override
         public Fragment getItem(int pos) {
