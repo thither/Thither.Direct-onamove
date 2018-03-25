@@ -57,7 +57,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         String mprovider = locationManager.getBestProvider(criteria, false);
         Toast.makeText(mCtx, "Checking location data availability: "+mprovider, Toast.LENGTH_SHORT).show();
         if (!is_gps_enabled() && !is_inet_enabled()) {
-            mGlobals.location = null;
+            mGlobals.set_location(null);
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(mCtx);
             alertDialog.setTitle("Location settings");
             alertDialog.setMessage("Location data is not enabled. " +
@@ -84,7 +84,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
             Toast.makeText(mCtx, "Location data is available!", Toast.LENGTH_SHORT).show();
             //        "Your Location is - \nLat: " + latitude + "\n" +
             //        "Long: " + longitude, Toast.LENGTH_LONG).show();
-            mGlobals.location=this;
+            mGlobals.set_location(this);
         }
     }
     public void set_location() {

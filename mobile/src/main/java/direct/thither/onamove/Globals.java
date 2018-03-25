@@ -8,13 +8,10 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 import org.json.JSONException;
-import org.w3c.dom.Text;
 
 import java.util.Currency;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import direct.thither.onamove.receivers.LocationReceiver;
@@ -22,7 +19,14 @@ import direct.thither.onamove.receivers.LocationReceiver;
 public class Globals {
 
     public boolean internet = Boolean.FALSE;
-    public LocationReceiver location;
+    private LocationReceiver m_location = null;
+    public synchronized void set_location(LocationReceiver location){
+        m_location = location;
+    }
+    public synchronized LocationReceiver get_location(){
+        return  m_location;
+    }
+
 
     public ConcurrentHashMap<String, Render> renders;
     private JSONObject qParams;

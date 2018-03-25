@@ -150,8 +150,8 @@ public class SearchSettings {
             public void onStartTrackingTouch(SeekBar elem){}
             @Override
             public void onStopTrackingTouch(SeekBar elem){
-                if(old_freq != mGlobals.update_freq){
-                    mGlobals.location.set_location();
+                if(old_freq != mGlobals.update_freq && mGlobals.get_location()!=null){
+                    mGlobals.get_location().set_location();
                 }
             }
             @Override
