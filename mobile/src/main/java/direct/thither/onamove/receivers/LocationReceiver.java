@@ -26,7 +26,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
 
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
-    Location location; // Location
+    Location m_location = null; // Location
     double latitude; // Latitude
     double longitude; // Longitude
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // meters
@@ -91,7 +91,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         if(is_gps_enabled()){
             set_gps_location();
         }
-        if (location==null && is_inet_enabled()){
+        if (m_location==null && is_inet_enabled()){
             set_inet_location();
         }
 
@@ -112,7 +112,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, mGlobals.update_freq,
                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
         Location new_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(new_loc!=null) location = new_loc;
+        if(new_loc!=null) m_location = new_loc;
     }
 
     public void set_inet_location() {
@@ -124,17 +124,19 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, mGlobals.update_freq,
                 MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
         Location new_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if(new_loc!=null) location = new_loc;
+        if(new_loc!=null) m_location = new_loc;
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        m_location = location;
         set_coordinates();
     }
     private void set_coordinates(){
-        if(location==null) return;
-        latitude = Math.round(location.getLatitude()*100000.0d)/100000.0d;
-        longitude = Math.round(location.getLongitude()*100000.0d)/100000.0d;
+        if(m_location==null) return;
+
+        latitude = Math.round(m_location.getLatitude()*100000.0d)/100000.0d;
+        longitude = Math.round(m_location.getLongitude()*100000.0d)/100000.0d;
         mGlobals.set_param("lat", Double.toString(latitude));
         mGlobals.set_param("lng", Double.toString(longitude));
         //Toast.makeText(mCtx, "Your Location is - \nLat: " + latitude + "\n" +
