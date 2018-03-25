@@ -101,6 +101,10 @@ public class Globals {
         m_preferences.edit().putLong(k, v).apply();
     }
 
+    public synchronized float get_rad_distance_for_update(){
+        return Float.parseFloat(get_param("rad"))/10;
+    }
+
     public synchronized void unset_param(String k){ qParams.remove(k);}
     public synchronized void set_param(String k, String v){
         try {qParams.put(k, v); } catch (JSONException e) { }

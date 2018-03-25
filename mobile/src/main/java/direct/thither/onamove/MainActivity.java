@@ -41,25 +41,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mGlobals = ((App)getApplication()).globals;
-        mGlobals.load_preferences(
-                getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE));
-
         setContentView(R.layout.activity_main);
 
-        TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        if(tm!=null)mGlobals.set_param("isoLoc", tm.getNetworkCountryIso());
-
-        locationReceiver.onReceive(this, getIntent());
-        networkStateReceiver.onReceive(this, getIntent());
-
+        init();
         run();
     }
 
+    private void init(){
+        if(mGlobals == null) {
+            mGlobals = ((App) getApplication()).globals;
+            mGlobals.load_preferences(
+                    getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE));
+
+            TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            if (tm != null) mGlobals.set_param("isoLoc", tm.getNetworkCountryIso());
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();
+        init();
         registerReceiver(networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         registerReceiver(locationReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
     }

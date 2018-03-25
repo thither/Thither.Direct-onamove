@@ -137,6 +137,7 @@ public class SearchSettings {
             public void onStopTrackingTouch(SeekBar elem){}
             @Override
             public void onProgressChanged(SeekBar elem, int v, boolean state){
+                if(v<10)v=10;
                 mGlobals.set_param("rad", v);
                 on_radius_holder.setText(Integer.toString(v)+"m");
             }});

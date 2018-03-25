@@ -130,11 +130,10 @@ public class ProductsResult extends Fragment implements SwipeRefreshLayout.OnRef
         }
         String lat_p = mGlobals.get_param("lat");
         String lng_p = mGlobals.get_param("lng");
-        String rad_p = mGlobals.get_param("rad");
-        if(lat_p==null || lng_p==null || rad_p==null)return;
+        float dif = mGlobals.get_rad_distance_for_update();
+        if(lat_p==null || lng_p==null || dif==0)return;
         float lat = 180+Float.parseFloat(lat_p)*100000;
         float lng = 180+Float.parseFloat(lng_p)*100000;
-        float dif = Float.parseFloat(rad_p)/10;
         if(lat-last_lat<=dif || lng-last_lng<=dif)return;
         last_lat=lat;
         last_lng=lng;

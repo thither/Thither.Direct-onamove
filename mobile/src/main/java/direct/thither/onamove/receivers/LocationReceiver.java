@@ -29,7 +29,6 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
     Location m_location = null; // Location
     double latitude; // Latitude
     double longitude; // Longitude
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // meters
     protected LocationManager locationManager;
 
     private Context mCtx;
@@ -110,7 +109,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         ContextCompat.checkSelfPermission(mCtx, android.Manifest.permission.ACCESS_COARSE_LOCATION);
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, mGlobals.update_freq,
-                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                Long.parseLong(Float.toString(mGlobals.get_rad_distance_for_update())), this);
         Location new_loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(new_loc!=null) m_location = new_loc;
     }
@@ -122,7 +121,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         ContextCompat.checkSelfPermission(mCtx, android.Manifest.permission.ACCESS_COARSE_LOCATION);
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, mGlobals.update_freq,
-                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
+                Long.parseLong(Float.toString(mGlobals.get_rad_distance_for_update())), this);
         Location new_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if(new_loc!=null) m_location = new_loc;
     }
