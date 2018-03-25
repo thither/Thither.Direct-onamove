@@ -37,7 +37,7 @@ public class Globals {
 
     public class Render {
         public Render (){}
-        //public Fragment getFragment() { Fragment holder=null; return holder; }
+        public Fragment getFragment() { Fragment holder=null; return holder; }
         public void data(String s){}
         public void data(JSONObject s){}
         public void set_active(){}
