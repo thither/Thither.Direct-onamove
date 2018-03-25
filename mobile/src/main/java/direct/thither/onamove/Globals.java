@@ -37,12 +37,12 @@ public class Globals {
 
     public class Render {
         public Render (){}
-        public Fragment getFragment() { Fragment holder=null; return holder; };
-        public void data(String s){};
-        public void data(JSONObject s){};
-        public void set_active(){};
-        public void set_timer(){};
-        public void run(String s){};
+        //public Fragment getFragment() { Fragment holder=null; return holder; }
+        public void data(String s){}
+        public void data(JSONObject s){}
+        public void set_active(){}
+        public void set_timer(){}
+        public void run(String s){}
     }
 
     public Globals() {
@@ -72,6 +72,7 @@ public class Globals {
         if(v==null){
             qParams = new JSONObject();
             set_param("length", "4");
+            set_param("rad", "1000");
             set_param("curr", Currency.getInstance(Locale.getDefault()).getCurrencyCode());
         }
 
@@ -105,7 +106,8 @@ public class Globals {
     public void set_param(String k, long v){    set_param(k, String.valueOf(v)); }
     public void set_param(String k, double v){  set_param(k, String.valueOf(v)); }
     public synchronized String get_param(String k){
-        try {return qParams.getString(k); } catch (JSONException e) { return null;}
+        try {return qParams.getString(k); } catch (JSONException e) { }
+        return null;
     }
 
     public synchronized String get_query_params(){

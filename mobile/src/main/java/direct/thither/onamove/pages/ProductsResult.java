@@ -34,6 +34,8 @@ public class ProductsResult extends Fragment implements SwipeRefreshLayout.OnRef
     private Globals mGlobals;
     private Comm mComm;
     public Thread t;
+    private float last_lat;
+    private float last_lng;
 
     public ProductsResult() {
         mGlobals = App.getInstance().globals;
@@ -115,7 +117,8 @@ public class ProductsResult extends Fragment implements SwipeRefreshLayout.OnRef
         public void run() {
             if(mGlobals.last_update!=0){
                 mGlobals.get_status_bar().setText(
-                        "Last update was "+
+                        mGlobals.get_param("lat")+", "+mGlobals.get_param("lng")+
+                        " Last update was "+
                                 DateUtils.getRelativeTimeSpanString(mGlobals.last_update, System.currentTimeMillis(), 0));
             }}});
     }
@@ -125,6 +128,16 @@ public class ProductsResult extends Fragment implements SwipeRefreshLayout.OnRef
             if(updates_timer!=null) updates_timer.cancel();
             return;
         }
+        String lat_p = mGlobals.get_param("lat");
+        String lng_p = mGlobals.get_param("lng");
+        String rad_p = mGlobals.get_param("rad");
+        if(lat_p==null || lng_p==null || rad_p==null)return;
+        float lat = 180+Float.parseFloat(lat_p)*100000;
+        float lng = 180+Float.parseFloat(lng_p)*100000;
+        float dif = Float.parseFloat(rad_p)/10;
+        if(lat-last_lat<=dif || lng-last_lng<=dif)return;
+        last_lat=lat;
+        last_lng=lng;
         mComm.make_request(mGlobals.get_query_params());
     }
     public void timer() {

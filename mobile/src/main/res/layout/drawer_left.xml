@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="1dp"
-                    android:max="10000"
+                    android:max="25000"
                     android:progress="1000"
                     android:soundEffectsEnabled="false" />
             </LinearLayout>

@@ -36,7 +36,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
 
     private Globals mGlobals;
     public LocationReceiver() {
-        mGlobals = App.getInstance().globals;;
+        mGlobals = App.getInstance().globals;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
             alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                    mCtx.startActivity(intent);;
+                    mCtx.startActivity(intent);
                 }
             });
             // On pressing the cancel button
@@ -88,12 +88,13 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         }
     }
     public void set_location() {
-        if (is_inet_enabled()){
-            set_inet_location();
-        }
-        else if(is_gps_enabled()){
+        if(is_gps_enabled()){
             set_gps_location();
         }
+        if (location==null && is_inet_enabled()){
+            set_inet_location();
+        }
+
     }
     public boolean is_gps_enabled() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -132,10 +133,10 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
     }
     private void set_coordinates(){
         if(location==null) return;
-        longitude = location.getLongitude();
-        latitude = location.getLatitude();
-        mGlobals.set_param("lat", Double.toString(location.getLatitude()));
-        mGlobals.set_param("lng", Double.toString(location.getLongitude()));
+        latitude = Math.round(location.getLatitude()*100000.0d)/100000.0d;
+        longitude = Math.round(location.getLongitude()*100000.0d)/100000.0d;
+        mGlobals.set_param("lat", Double.toString(latitude));
+        mGlobals.set_param("lng", Double.toString(longitude));
         //Toast.makeText(mCtx, "Your Location is - \nLat: " + latitude + "\n" +
         //        "Long: " + longitude, Toast.LENGTH_LONG).show();
     }
