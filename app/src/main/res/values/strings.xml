@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">on a move</string>
+    <string name="app_name_upper">ON A MOVE</string>
+    <string name="preference_file_key">direct.thither.onamove.preferences</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
