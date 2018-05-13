@@ -144,10 +144,9 @@ public class SearchSettings {
             }
             @Override
             public void onProgressChanged(SeekBar elem, int v, boolean state){
-                String v1 = Integer.toString(v);
-                m_props.update_freq = (long)Double.parseDouble(v1);
+                m_props.update_freq = (long)v;
                 m_props.apply_pref("update_freq", m_props.update_freq);
-                update_freq_holder.setText(v1+"s");
+                update_freq_holder.setText(Integer.toString(v)+"s");
                 m_props.renders.get("1").set_timers();
             }});
 
