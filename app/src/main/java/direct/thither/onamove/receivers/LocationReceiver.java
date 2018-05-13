@@ -120,7 +120,7 @@ public class LocationReceiver extends BroadcastReceiver implements LocationListe
         ContextCompat.checkSelfPermission(mCtx, android.Manifest.permission.ACCESS_COARSE_LOCATION);
 
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, m_props.update_freq,
-                Long.parseLong(Float.toString(m_props.get_rad_distance_for_update())), this);
+                m_props.get_rad_distance_for_update(), this);
         Location new_loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if(new_loc!=null) m_location = new_loc;
     }
