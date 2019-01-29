@@ -10,25 +10,17 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.Deflater;
-import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
 import direct.thither.onamove.properties.PropsHolder;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
-import okhttp3.Protocol;
 
 public class Comm {
     private PropsHolder m_props;
 
     public Comm() {
-        m_props = App.getInstance().props;;
+        m_props = App.getInstance().props;
     }
 
     public void make_request(){make_request("");}
@@ -36,13 +28,7 @@ public class Comm {
         new Thread(new Runnable() {
         @Override
         public void run(){
-            List<Protocol> protocols = new ArrayList<>();
-            protocols.add(Protocol.HTTP_2);
-            protocols.add(Protocol.HTTP_1_1);
             try {
-                OkHttpClient client = new OkHttpClient.Builder()
-                        .protocols(protocols)
-                        .build();
                 Request request = new Request.Builder()
                         .url("https://thither.direct/json/"+m_props.lang+"?app=onamove&flw=1&" +q )
                         .header("Accept", "text/html")
@@ -51,7 +37,10 @@ public class Comm {
                 try {
                     process_response(
                             new JSONObject(
-                                    decompress(client.newCall(request).execute().body().bytes())));
+                                    decompress(
+                                            m_props.get_client_http().newCall(request)
+                                                    .execute().body().bytes()
+                                    )));
                     m_props.apply_pref();
                 } catch (Exception e) {
                     process_response(e);
