@@ -6,12 +6,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.json.JSONObject;
 
 import java.util.Currency;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.concurrent.ConcurrentHashMap;
+
+import java.util.ArrayList;
+import java.util.List;
+import okhttp3.OkHttpClient;
+import okhttp3.Protocol;
 
 import direct.thither.onamove.receivers.LocationReceiver;
 
@@ -58,13 +61,21 @@ public class PropsHolder {
     }
 
 
-
+    private OkHttpClient _client_http = null;
+    public synchronized OkHttpClient get_client_http() {
+        if(_client_http != null ) return _client_http;
+        List<Protocol> protocols = new ArrayList<>();
+        protocols.add(Protocol.HTTP_2);
+        protocols.add(Protocol.HTTP_1_1);
+        _client_http = new OkHttpClient.Builder().protocols(protocols).build();
+        return _client_http;
+    }
 
     public long update_freq = 60;
     public String lang = "";
 
     private SharedPreferences m_preferences;
-    public synchronized void load_preferences(SharedPreferences pref){
+        public synchronized void load_preferences(SharedPreferences pref){
         m_preferences = pref;
         params.put("main", new QueryParams(pref.getString("main", null)));
         QueryParams p = params.get("main");
